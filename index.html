@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRHACKER007 | Colorful Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            background: #000;
+        }
+
+        /* Animated JS Background */
+        #canvas-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            filter: blur(50px);
+            opacity: 0.8;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            padding: 2rem;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .profile-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 4px solid rgba(255,255,255,0.3);
+            margin-bottom: 1rem;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .typing-text {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+        }
+
+        /* Colorful Link Buttons */
+        .links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .link-item {
+            padding: 1.2rem;
+            border-radius: 18px;
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.05rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            position: relative;
+            animation: float 4s infinite ease-in-out;
+        }
+
+        /* Individual Button Colors */
+        .link-1 { background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%); animation-delay: 0.1s; }
+        .link-2 { background: linear-gradient(45deg, #5ee7df 0%, #b490ca 100%); animation-delay: 0.3s; }
+        .link-3 { background: linear-gradient(45deg, #667eea 0%, #764ba2 100%); animation-delay: 0.5s; }
+        .link-4 { background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 100%); color: #444; animation-delay: 0.7s; }
+        .link-5 { background: linear-gradient(45deg, #43e97b 0%, #38f9d7 100%); color: #000; animation-delay: 0.9s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .link-item:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
+            filter: brightness(1.1);
+        }
+
+        .link-item:active {
+            transform: scale(0.95);
+        }
+
+    </style>
+</head>
+<body>
+
+    <canvas id="canvas-bg"></canvas>
+
+    <div class="container">
+        <img src="channels4_profile.jpg" alt="Avatar" class="profile-img">
+        <h1 style="margin-bottom: 5px;">HR HACKER 007</h1>
+        <div class="typing-text">> Hackers Zone</div>
+
+        <nav class="links-list">
+            <a href="https://whatsapp.com/channel/0029Vb6x2lN4NVidKQbe9Z3y?utm_medium=social&utm_source=heylink.me" class="link-item link-1"><img width="10%" src="whatsapp.png" alt="whats">&nbsp; Whatsapp</a>
+            <a href="https://t.me/techhacker007" class="link-item link-2"><img width="16%" src="telegram.webp" alt="tele">Telegram</a>
+            <a href="https://www.instagram.com/tech_hacker7x" class="link-item link-3"><img width="16%" src="insta.png" alt="">Instagram</a>
+            <a href="https://youtube.com/@hr_hacker007" class="link-item link-4"><img width="10%" src="yt.png" alt="yt">&nbsp; Youtube</a>
+        </nav>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        let time = 0;
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.onresize = resize;
+        resize();
+
+        function animate() {
+            time += 0.005; // Slower, smoother transitions
+            ctx.fillStyle = '#0a0a0a';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            for (let x = 0; x <= 30; x += 5) {
+                for (let y = 0; y <= 30; y += 5) {
+                    const r = Math.floor(127 + 127 * Math.sin(x * 0.1 + time));
+                    const g = Math.floor(127 + 127 * Math.cos(y * 0.1 + time));
+                    const b = Math.floor(200 + 55 * Math.sin(time));
+                    
+                    ctx.fillStyle = `rgb(${r},${g},${b})`;
+                    ctx.beginPath();
+                    ctx.arc(x * (canvas.width / 30), y * (canvas.height / 30), 200, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>
